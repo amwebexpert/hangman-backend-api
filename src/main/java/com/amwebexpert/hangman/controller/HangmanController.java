@@ -38,13 +38,12 @@ public class HangmanController {
         }
     }
 
-    @RequestMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Category getCategory(@PathVariable("uuid") UUID uuid) {
         return categoryService.findByUuid(uuid);
     }
 
-    @RequestMapping(value = "/{uuid}/text", produces = MediaType.APPLICATION_JSON_VALUE)
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{uuid}/texts", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Page<Text>> findCategoryElements(@PathVariable("uuid") UUID uuid, Pageable pageable) {
         Category category = categoryService.findByUuid(uuid);
         Page<Text> pagedResults = textService.findByCategory(category, pageable);
