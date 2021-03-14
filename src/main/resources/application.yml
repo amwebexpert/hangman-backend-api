@@ -15,9 +15,6 @@ spring:
     password: amw
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create
-      generate-ddl: true
 
 logging:
   level:

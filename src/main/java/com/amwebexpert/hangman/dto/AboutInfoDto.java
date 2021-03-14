@@ -1,4 +1,4 @@
-package com.amwebexpert.hangman.model;
+package com.amwebexpert.hangman.dto;
 
 import com.amwebexpert.hangman.config.AboutInfo;
 
