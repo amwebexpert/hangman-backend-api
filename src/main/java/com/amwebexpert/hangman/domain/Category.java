@@ -7,11 +7,11 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "categories")
+@Table(name = "category")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false, unique = true, nullable = false)
+    @Column(name="category_id", updatable = false, unique = true, nullable = false)
     Long id;
 
     @Column(name = "uuid", nullable = false)
@@ -77,7 +77,7 @@ public class Category {
                 "id=" + id +
                 ", uuid=" + uuid +
                 ", langCode='" + langCode + '\'' +
-                ", category='" + name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

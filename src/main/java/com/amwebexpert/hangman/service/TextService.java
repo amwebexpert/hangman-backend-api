@@ -1,30 +1,29 @@
 package com.amwebexpert.hangman.service;
 
 import com.amwebexpert.hangman.domain.Category;
-import com.amwebexpert.hangman.repository.CategoryRepository;
+import com.amwebexpert.hangman.domain.Text;
+import com.amwebexpert.hangman.repository.TextRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.UUID;
-
 @Service
 @Transactional
-public class CategoryService {
+public class TextService {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    TextRepository textRepository;
 
     @Transactional(readOnly = true)
-    public Page<Category> findAll(Pageable pageable) {
-        return categoryRepository.findAll(pageable);
+    public Page<Text> findAll(Pageable pageable) {
+        return textRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
-    public Category findByUuid(UUID uuid) {
-        return categoryRepository.findByUuid(uuid);
+    public Page<Text> findByCategory(Category category, Pageable pageable) {
+        return textRepository.findByCategory(category, pageable);
     }
 
 }
