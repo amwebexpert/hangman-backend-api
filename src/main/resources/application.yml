@@ -1,0 +1,31 @@
+app:
+  build-info:
+    name: Hangman
+    versionDate: 2021-03-14
+
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassname: org.h2.Driver
+    username: amw
+    password: amw
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      generate-ddl: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.springframework.web.client.RestTemplate: WARN
+    org.springframework.web.filter.CommonsRequestLoggingFilter: WARN
+    org.hibernate.validator.internal.engine.ValidatorImpl: WARN
+    org.hibernate.type.descriptor.sql: WARN
+    org.hibernate.SQL: INFO
+    com.amwebexpert: INFO
