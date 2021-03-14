@@ -3,7 +3,9 @@ package com.amwebexpert.hangman.domain;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +27,9 @@ public class Category {
     @Column(name = "name", nullable = false)
     @NotBlank
     String name;
+
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    Set<Text> texts = new HashSet<>();
 
     public Long getId() {
         return id;

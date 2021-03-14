@@ -62,25 +62,17 @@ public class Text {
         this.normalized = normalized;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Text text = (Text) o;
-        return id.equals(text.id) && uuid.equals(text.uuid) && original.equals(text.original) && normalized.equals(text.normalized) && category.equals(text.category);
+        return id.equals(text.id) && uuid.equals(text.uuid) && original.equals(text.original) && normalized.equals(text.normalized);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, uuid, original, normalized, category);
+        return Objects.hash(id, uuid, original, normalized);
     }
 
     @Override
@@ -90,7 +82,6 @@ public class Text {
                 ", uuid=" + uuid +
                 ", original='" + original + '\'' +
                 ", normalized='" + normalized + '\'' +
-                ", category=" + category +
                 '}';
     }
 }
