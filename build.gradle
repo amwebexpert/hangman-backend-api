@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.4.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -33,3 +42,15 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+apply plugin: 'com.google.cloud.tools.appengine'
+
+appengine {  // App Engine tasks configuration
+    deploy {   // deploy configuration
+        projectId = 'esighclouddemo' // gcloud config set project
+        version = 'GCLOUD_CONFIG'   // gcloud to generate a version
+        stopPreviousVersion = true
+        promote = true
+    }
+}
+
