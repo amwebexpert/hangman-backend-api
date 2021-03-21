@@ -1,9 +1,16 @@
 app:
   build-info:
     name: Hangman
-    versionDate: 2021-03-14
+    versionDate: 2021-03-21
 
 spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            clientId: ${ENV_VAR_CLIENT_ID_GITHUB:value_not_defined_in_environment_variable}
+            clientSecret: ${ENV_VAR_CLIENT_SECRET_GITHUB:value_not_defined_in_environment_variable}
   h2:
     console:
       enabled: true

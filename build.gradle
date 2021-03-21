@@ -27,6 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
     // https://www.baeldung.com/spring-rest-openapi-documentation
@@ -39,6 +40,7 @@ dependencies {
     implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
     implementation group: 'org.webjars', name: 'bootstrap', version: '4.6.0-1'
     implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.46'
+    implementation group: 'org.webjars', name: 'js-cookie', version: '2.1.0'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
