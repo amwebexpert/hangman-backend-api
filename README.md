@@ -39,6 +39,7 @@ You can skip certain tasks by providing `-x` argument:
         repositories {
             mavenCentral()
         }
+    
         dependencies {
             classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0'
         }
@@ -68,7 +69,12 @@ You can skip certain tasks by providing `-x` argument:
     sudo apt install python3-distutils -y
     gcloud app update --split-health-checks --project esighclouddemo
 
+# Resources for OAuth2 and JWT
 
+* https://spring.io/guides/tutorials/spring-boot-oauth2/
+* https://jwt.io/
+* https://www.youtube.com/watch?v=X80nJ5T7YpE
+* https://github.com/koushikkothagal/spring-security-jwt
 
 
 # Getting Started
