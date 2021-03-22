@@ -72,6 +72,8 @@ You can skip certain tasks by providing `-x` argument:
 # Resources for OAuth2 and JWT
 
 * https://spring.io/guides/tutorials/spring-boot-oauth2/
+  To be continued on this section: Login with GitHub
+    In this section, you’ll modify the logout app you built already, adding a sticker page so that the end-user can choose between multiple sets of credentials 
 * https://jwt.io/
 * https://www.youtube.com/watch?v=X80nJ5T7YpE
 * https://github.com/koushikkothagal/spring-security-jwt
