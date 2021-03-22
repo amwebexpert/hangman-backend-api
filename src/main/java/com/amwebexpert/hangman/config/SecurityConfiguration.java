@@ -24,6 +24,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/error").permitAll()
                         .antMatchers("/h2-console/**").permitAll()
                         .antMatchers("/api/v1/about").permitAll()
+                        .antMatchers("/api/v1/categories/**").permitAll()
                         // All other resources need authentication
                         .anyRequest().authenticated()
                 )
