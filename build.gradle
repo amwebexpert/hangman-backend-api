@@ -61,6 +61,7 @@ processResources {
         println "Start filtering: buildDate = $buildDate"
         filter ReplaceTokens, tokens: [
                 "buildDate": buildDate,
+                "ENV_VAR_WEB_APP_BASE_URL": System.getenv("ENV_VAR_WEB_APP_BASE_URL"),
                 "ENV_VAR_CLIENT_ID_GITHUB": System.getenv("ENV_VAR_CLIENT_ID_GITHUB"),
                 "ENV_VAR_CLIENT_SECRET_GITHUB": System.getenv("ENV_VAR_CLIENT_SECRET_GITHUB"),
         ]

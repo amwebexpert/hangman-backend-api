@@ -9,8 +9,10 @@ spring:
       client:
         registration:
           github:
+            ## See also https://stackoverflow.com/a/50042533/704681
             clientId: ${ENV_VAR_CLIENT_ID_GITHUB:@ENV_VAR_CLIENT_ID_GITHUB@}
             clientSecret: ${ENV_VAR_CLIENT_SECRET_GITHUB:@ENV_VAR_CLIENT_SECRET_GITHUB@}
+            redirectUri: ${ENV_VAR_WEB_APP_BASE_URL:@ENV_VAR_WEB_APP_BASE_URL@}/login/oauth2/code/github
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassname: org.h2.Driver
