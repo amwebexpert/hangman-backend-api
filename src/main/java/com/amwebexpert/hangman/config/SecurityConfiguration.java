@@ -22,7 +22,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // List of anonymous access resources
                         .antMatchers("/error").permitAll()
-                        .antMatchers("/h2-console/**").permitAll()
                         .antMatchers("/api/v1/about").permitAll()
                         .antMatchers("/api/v1/categories/**").permitAll()
                         // All other resources need authentication
@@ -36,12 +35,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout(customizer -> customizer.logoutSuccessUrl("/").permitAll())
                 .csrf(customizer -> customizer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .oauth2Login();
-
-        boolean h2Console = false;
-        if (h2Console) {
-            httpSecurity.csrf().disable();
-            httpSecurity.headers().frameOptions().disable();
-        }
     }
 
 }

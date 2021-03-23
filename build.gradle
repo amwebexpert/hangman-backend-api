@@ -1,3 +1,6 @@
+import org.apache.tools.ant.filters.*
+import java.text.SimpleDateFormat
+
 buildscript {
     repositories {
         mavenCentral()
@@ -14,7 +17,7 @@ plugins {
 }
 
 group = 'com.amwebexpert'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -48,6 +51,21 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'application.yml'
+
+        String buildDate = new SimpleDateFormat('yyyy-MM-dd').format(new Date())
+        println "Start filtering: buildDate = $buildDate"
+        filter ReplaceTokens, tokens: [
+                "buildDate": buildDate,
+                "ENV_VAR_CLIENT_ID_GITHUB": System.getenv("ENV_VAR_CLIENT_ID_GITHUB"),
+                "ENV_VAR_CLIENT_SECRET_GITHUB": System.getenv("ENV_VAR_CLIENT_SECRET_GITHUB"),
+        ]
+        println "End filtering."
+    }
 }
 
 apply plugin: 'com.google.cloud.tools.appengine'

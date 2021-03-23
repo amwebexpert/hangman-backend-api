@@ -1,7 +1,7 @@
 app:
   build-info:
     name: Hangman
-    versionDate: 2021-03-21
+    versionDate: v@buildDate@
 
 spring:
   security:
@@ -9,12 +9,8 @@ spring:
       client:
         registration:
           github:
-            clientId: ${ENV_VAR_CLIENT_ID_GITHUB:value_not_defined_in_environment_variable}
-            clientSecret: ${ENV_VAR_CLIENT_SECRET_GITHUB:value_not_defined_in_environment_variable}
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+            clientId: ${ENV_VAR_CLIENT_ID_GITHUB:@ENV_VAR_CLIENT_ID_GITHUB@}
+            clientSecret: ${ENV_VAR_CLIENT_SECRET_GITHUB:@ENV_VAR_CLIENT_SECRET_GITHUB@}
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassname: org.h2.Driver
