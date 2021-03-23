@@ -1,3 +1,6 @@
+import org.apache.tools.ant.filters.*
+import java.text.SimpleDateFormat
+
 buildscript {
     repositories {
         mavenCentral()
@@ -14,7 +17,7 @@ plugins {
 }
 
 group = 'com.amwebexpert'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -27,6 +30,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-hateoas'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
     // https://www.baeldung.com/spring-rest-openapi-documentation
@@ -35,12 +39,34 @@ dependencies {
     implementation 'org.flywaydb:flyway-core'
     implementation 'com.h2database:h2'
 
+    // https://mvnrepository.com/artifact/org.webjars
+    implementation group: 'org.webjars', name: 'jquery', version: '3.6.0'
+    implementation group: 'org.webjars', name: 'bootstrap', version: '4.6.0-1'
+    implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.46'
+    implementation group: 'org.webjars', name: 'js-cookie', version: '2.1.0'
+
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {
     useJUnitPlatform()
+}
+
+processResources {
+    from('src/main/resources') {
+        include 'application.yml'
+
+        String buildDate = new SimpleDateFormat('yyyy-MM-dd').format(new Date())
+        println "Start filtering: buildDate = $buildDate"
+        filter ReplaceTokens, tokens: [
+                "buildDate": buildDate,
+                "ENV_VAR_WEB_APP_BASE_URL": System.getenv("ENV_VAR_WEB_APP_BASE_URL"),
+                "ENV_VAR_CLIENT_ID_GITHUB": System.getenv("ENV_VAR_CLIENT_ID_GITHUB"),
+                "ENV_VAR_CLIENT_SECRET_GITHUB": System.getenv("ENV_VAR_CLIENT_SECRET_GITHUB"),
+        ]
+        println "End filtering."
+    }
 }
 
 apply plugin: 'com.google.cloud.tools.appengine'

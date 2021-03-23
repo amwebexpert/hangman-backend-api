@@ -1,8 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Hangman - Index file</title>
+    <title>Hangman API</title>
+
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="description" content="Hangman backend welcome page"/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+
+    <link type="text/css" rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/webjars/js-cookie/js.cookie.js"></script>
 </head>
 
 <style>
@@ -14,43 +25,74 @@ table, th, td {
 
 <body>
 
-<h2>Exposed API for the Hangman application</h2>
+<div class="container">
 
-<ul>
-    <li><a href="/api/v1/about">/api/v1/about</a></li>
-    <li><a href="/api/v1/categories?size=100&page=0">/api/v1/categories</a></li>
-    <li><a href="/api/v1/categories/64d28a1e-24cf-40f7-a6f1-3a76fd534639/texts?size=100&page=0">/api/v1/categories/[uuid]/text</a></li>
-</ul>
+    <h2>Public APIs for the Hangman application</h2>
+    <ul>
+        <li><a href="/api/v1/about">/api/v1/about</a></li>
+        <li><a href="/api/v1/categories?size=100&page=0">/api/v1/categories</a></li>
+        <li><a href="/api/v1/categories/64d28a1e-24cf-40f7-a6f1-3a76fd534639/texts?size=100&page=0">/api/v1/categories/[uuid]/text</a>
+        </li>
+    </ul>
 
+    <h2>Swagger documentation</h2>
+    <ul>
+        <li><a target="_blank" href="/swagger-ui.html">Swagger UI</a></li>
+    </ul>
 
-<h2>Swagger auto-generated online documentation</h2>
-<ul>
-    <li><a target="_blank" href="/swagger-ui.html">Swagger UI</a></li>
-</ul>
+    <h2>Secured APIs for the Hangman application</h2>
+    <ul>
+        <li><a href="/api/v1/admin/about">/api/v1/admin/about</a></li>
+    </ul>
+    <div class="container unauthenticated">
+        <a class="btn btn-primary" href="/oauth2/authorization/github">
+            OAuth2 GitHub
+        </a>
+        <a class="btn btn-primary" href="/oauth2/authorization/github">
+            OAuth2 Google
+        </a>
+    </div>
+    <div class="container authenticated">
+        Logged in as: <span id="user"></span>
+        <div>
+            <button onClick="logout()" class="btn btn-primary">
+                <span class="fas fa-logout"></span>
+                Logout
+            </button>
+        </div>
+    </div>
 
+</div>
 
-<h2>Web database console for viewing generated IDs</h2>
-<ul>
-    <li>
-        <a target="_blank" href="/h2-console">H2 Console</a>
-    </li>
-</ul>
+<script type="text/javascript">
+$(".authenticated").hide()
 
-<table>
-    <tr>
-        <td>URL</td>
-        <td>jdbc:h2:mem:testdb</td>
-    </tr>
-    <tr>
-        <td>username</td>
-        <td>amw</td>
-    </tr>
-    <tr>
-        <td>password</td>
-        <td></td>
-    </tr>
-</table>
+$.ajaxSetup({
+  beforeSend : function(xhr, settings) {
+    if (settings.type == 'POST' || settings.type == 'PUT' || settings.type == 'DELETE') {
+      if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+        // Only send the token to relative URLs i.e. locally.
+        xhr.setRequestHeader("X-XSRF-TOKEN", Cookies.get('XSRF-TOKEN'));
+      }
+    }
+  }
+});
 
+$.get("/api/v1/user", function(data) {
+    $("#user").html(data.name);
+    $(".unauthenticated").hide()
+    $(".authenticated").show()
+});
+
+var logout = function() {
+    $.post("/logout", function() {
+        $("#user").html('');
+        $(".unauthenticated").show();
+        $(".authenticated").hide();
+    })
+    return true;
+}
+</script>
 
 </body>
 </html>
