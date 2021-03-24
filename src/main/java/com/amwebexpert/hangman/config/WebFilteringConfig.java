@@ -1,5 +1,6 @@
 package com.amwebexpert.hangman.config;
 
+import com.amwebexpert.hangman.filter.CORSFilter;
 import com.amwebexpert.hangman.filter.RequestLoggingFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -20,4 +21,15 @@ public class WebFilteringConfig {
 
         return registrationBean;
     }
+
+    @Bean
+    public FilterRegistrationBean<CORSFilter> corsFilter(){
+        FilterRegistrationBean<CORSFilter> registrationBean = new FilterRegistrationBean<>();
+
+        registrationBean.setFilter(new CORSFilter());
+        registrationBean.addUrlPatterns("/api/*");
+
+        return registrationBean;
+    }
+
 }
