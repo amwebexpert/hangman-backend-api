@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
 public class WebFilteringConfig {
 
     @Bean
-    public FilterRegistrationBean<RequestLoggingFilter> loggingFilter(){
+    public FilterRegistrationBean<RequestLoggingFilter> loggingFilter() {
         FilterRegistrationBean<RequestLoggingFilter> registrationBean = new FilterRegistrationBean<>();
 
         registrationBean.setFilter(new RequestLoggingFilter());
@@ -23,7 +23,7 @@ public class WebFilteringConfig {
     }
 
     @Bean
-    public FilterRegistrationBean<CORSFilter> corsFilter(){
+    public FilterRegistrationBean<CORSFilter> corsFilter() {
         FilterRegistrationBean<CORSFilter> registrationBean = new FilterRegistrationBean<>();
 
         registrationBean.setFilter(new CORSFilter());

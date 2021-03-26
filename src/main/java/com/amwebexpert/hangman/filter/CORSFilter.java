@@ -18,9 +18,12 @@ import java.io.IOException;
  * those APIs can only request resources from the same origin the application was loaded from unless
  * the response from other origins includes the right CORS headers.
  *
+ * @see com.amwebexpert.hangman.config.WebFilteringConfig
+ *
  * References:
  * https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
  * https://stackoverflow.com/questions/40418441/spring-security-cors-filter
+ * https://howtodoinjava.com/java/servlets/java-cors-filter-example/
  */
 @Component
 @Order(2)
@@ -31,11 +34,17 @@ public class CORSFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, Authorization");
+
+        // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
+        if (request.getMethod().equals("OPTIONS")) {
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+            return;
+        }
 
         chain.doFilter(req, res);
     }

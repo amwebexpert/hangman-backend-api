@@ -1,3 +1,38 @@
+# Hangman backend API
+
+Hangman application backend REST API.
+
+## Commands
+
+### Start locally
+
+Starts the server locally and listen on port `8080`. 
+
+    ./gradlew bootRun
+
+Then open the browser at http://localhost:8080 which will display the welcome page (`index.html`).
+
+### Deploy on GCP
+
+The following script builds the war and deploy it to GAE by calling `./gradlew appengineDeploy`:
+
+    ./deploy-to-Google-Cloud-Platform.sh
+
+Override the project name under `build.gradle` (see `appengine.deploy.projectId`). For instance if the projectId is `esighclouddemo` then the following links
+will allow you to see final results:
+
+* https://esighclouddemo.appspot.com/
+* https://console.cloud.google.com/logs/query?project=esighclouddemo
+
+### Setup Security for authenticating user against GitHub
+
+You must create your Github clientId and clientSecret. Any users may use the link to authenticate (available inside server welcome page `index.html`).
+Next you have to define these environment variables before deploying or before starting locally:
+
+    export ENV_VAR_WEB_APP_BASE_URL=<here your home page URL used by OAuth2 protocol>
+    export ENV_VAR_CLIENT_ID_GITHUB=<here your client id>
+    export ENV_VAR_CLIENT_SECRET_GITHUB=<here your client secret>
+
 # Gradle tasks
 
 Gradle will automatically fetch all required dependencies for you.
@@ -11,7 +46,7 @@ To force Gradle to re-download dependencies you can execute:
 
     ./gradlew build --refresh-dependencies
 
-To assemble you project without executing tests ([Gradle build without tests][2]):
+To assemble you project without executing tests:
 
     ./gradlew assemble
 
@@ -23,11 +58,6 @@ You can skip certain tasks by providing `-x` argument:
 
     ./gradlew build -x test
 
-
-# Deploying to GAE
-
-* https://esighclouddemo.appspot.com/
-* https://console.cloud.google.com/logs/query?project=esighclouddemo
 
 ## Steps to support GAE
 

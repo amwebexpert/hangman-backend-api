@@ -13,6 +13,9 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.logging.Logger;
 
+/**
+ * @see  * @see com.amwebexpert.hangman.config.WebFilteringConfig
+ */
 @Component
 @Order(1)
 public class RequestLoggingFilter implements Filter {
