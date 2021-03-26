@@ -1,7 +1,8 @@
 app:
   build-info:
     name: Hangman
-    versionDate: v@buildDate@
+    versionDate: ${buildDate:@buildDate@}
+    url: ${ENV_VAR_WEB_APP_BASE_URL:@ENV_VAR_WEB_APP_BASE_URL@}
 
 spring:
   security:

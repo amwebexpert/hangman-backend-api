@@ -1,5 +1,6 @@
 package com.amwebexpert.hangman.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,9 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    AboutInfo aboutInfo;
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -21,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/", "/*.html", "/favicon.ico", "/webjars/**").permitAll()
                         .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // List of anonymous access resources
+                        .antMatchers("/logout").permitAll()
                         .antMatchers("/error").permitAll()
                         .antMatchers("/api/v1/about").permitAll()
                         .antMatchers("/api/v1/categories/**").permitAll()
@@ -32,7 +37,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         // respond with a 401 instead of the default behavior of redirecting to a login page
                         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
                 )
-                .logout(customizer -> customizer.logoutSuccessUrl("/").permitAll())
+                .logout(customizer -> customizer
+                        .logoutSuccessUrl(aboutInfo.getUrl())
+                        .deleteCookies("JSESSIONID")
+                        .clearAuthentication(true)
+                        .permitAll())
                 .csrf(customizer -> customizer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .oauth2Login();
     }
