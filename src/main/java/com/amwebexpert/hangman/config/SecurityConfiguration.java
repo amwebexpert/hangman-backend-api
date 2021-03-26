@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .logoutSuccessUrl(aboutInfo.getUrl())
                         .deleteCookies("JSESSIONID")
                         .clearAuthentication(true)
+                        .invalidateHttpSession(true)
                         .permitAll())
                 .csrf(customizer -> customizer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .oauth2Login();
