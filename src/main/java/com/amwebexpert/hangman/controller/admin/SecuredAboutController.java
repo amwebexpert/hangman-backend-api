@@ -20,7 +20,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/admin/about")
 public class SecuredAboutController {
 
-    private static final List<String> PROPERTIES = Arrays.asList("java.runtime.version", "user.timezone", "user.country", "os.version", "os.arch", "java.versio", "java.runtime.name");
+    private static final List<String> PROPERTIES = Arrays.asList(
+            "java.runtime.version", "user.timezone", "user.country", "os.version", "os.arch", "java.version", "java.runtime.name"
+    );
 
     @Autowired
     AboutInfo aboutInfo;
@@ -37,8 +39,8 @@ public class SecuredAboutController {
         AboutInfoDto dto = AboutInfoDto.from(aboutInfo);
         dto.setOthers(others);
 
-        // Add servlet API version to the list of system properties
-        ServletContext sc = req.getSession().getServletContext();
+        // Add servlet context api version to the list of system properties
+        ServletContext sc = req.getServletContext();
         String version = sc.getMajorVersion() + "." + sc.getMinorVersion();
         dto.getOthers().put("Servlet API version", version);
 
