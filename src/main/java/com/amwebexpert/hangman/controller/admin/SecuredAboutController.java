@@ -10,20 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Properties;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/admin/about")
 public class SecuredAboutController {
+
+    private static final List<String> PROPERTIES = Arrays.asList("java.runtime.version", "user.timezone", "user.country", "os.version", "os.arch", "java.versio", "java.runtime.name");
 
     @Autowired
     AboutInfo aboutInfo;
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     AboutInfoDto about(HttpServletRequest req) {
-        AboutInfoDto dto = AboutInfoDto.from(aboutInfo);
+        // System properties
+        TreeMap<String, String> others = new TreeMap<>();
+        Properties systemProperties = System.getProperties();
+        for (String key : PROPERTIES) {
+            others.put(key, systemProperties.getProperty(key));
+        }
 
-        dto.setOthers(new TreeMap(System.getProperties()));
+        AboutInfoDto dto = AboutInfoDto.from(aboutInfo);
+        dto.setOthers(others);
 
         // Add servlet API version to the list of system properties
         ServletContext sc = req.getSession().getServletContext();
