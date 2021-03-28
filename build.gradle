@@ -64,6 +64,10 @@ processResources {
                 "ENV_VAR_WEB_APP_BASE_URL": System.getenv("ENV_VAR_WEB_APP_BASE_URL"),
                 "ENV_VAR_CLIENT_ID_GITHUB": System.getenv("ENV_VAR_CLIENT_ID_GITHUB"),
                 "ENV_VAR_CLIENT_SECRET_GITHUB": System.getenv("ENV_VAR_CLIENT_SECRET_GITHUB"),
+                "ENV_VAR_CLIENT_ID_FACEBOOK": System.getenv("ENV_VAR_CLIENT_ID_FACEBOOK"),
+                "ENV_VAR_CLIENT_SECRET_FACEBOOK": System.getenv("ENV_VAR_CLIENT_SECRET_FACEBOOK"),
+                "ENV_VAR_CLIENT_ID_GOOGLE": System.getenv("ENV_VAR_CLIENT_ID_GOOGLE"),
+                "ENV_VAR_CLIENT_SECRET_GOOGLE": System.getenv("ENV_VAR_CLIENT_SECRET_GOOGLE"),
         ]
         println "End filtering."
     }
