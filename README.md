@@ -108,6 +108,10 @@ You can skip certain tasks by providing `-x` argument:
 * https://www.youtube.com/watch?v=X80nJ5T7YpE
 * https://github.com/koushikkothagal/spring-security-jwt
 
+# Resources on privacy policy + terms and conditions
+
+* https://github.com/nisrulz/app-privacy-policy-generator
+* https://app-privacy-policy-generator.nisrulz.com/
 
 # Getting Started
 
