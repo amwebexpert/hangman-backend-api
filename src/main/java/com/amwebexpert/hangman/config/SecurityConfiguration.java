@@ -22,7 +22,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .authorizeRequests(customizer -> customizer
-                        .antMatchers("/", "/*.html", "/favicon.*", "/webjars/**").permitAll()
+                        .antMatchers("/", "/*.html", "/favicon.*").permitAll()
+                        .antMatchers("/webjars/**", "/font-awesome/**").permitAll()
                         .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         // List of anonymous access resources
                         .antMatchers("/logout").permitAll()

@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/"/>
 
+    <link type="text/css" rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css"/>
 
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
@@ -46,8 +47,13 @@ table, th, td {
     </ul>
 
     <div class="container unauthenticated">
-        <a class="btn btn-primary" href="/oauth2/authorization/github">
-            Login - OAuth2 GitHub
+        <a class="btn btn-secondary" href="/oauth2/authorization/github">
+            <span class="fa fa-github" aria-hidden="true"></span>
+            Login - GitHub
+        </a>
+        <a class="btn btn-primary" href="/oauth2/authorization/facebook">
+            <span class="fa fa-facebook" aria-hidden="true"></span>
+            Login - Facebook
         </a>
     </div>
 

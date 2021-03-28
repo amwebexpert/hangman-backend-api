@@ -14,6 +14,10 @@ spring:
             clientId: ${ENV_VAR_CLIENT_ID_GITHUB:@ENV_VAR_CLIENT_ID_GITHUB@}
             clientSecret: ${ENV_VAR_CLIENT_SECRET_GITHUB:@ENV_VAR_CLIENT_SECRET_GITHUB@}
             redirectUri: ${ENV_VAR_WEB_APP_BASE_URL:@ENV_VAR_WEB_APP_BASE_URL@}/login/oauth2/code/github
+          facebook:
+            clientId: ${ENV_VAR_CLIENT_ID_FACEBOOK:@ENV_VAR_CLIENT_ID_FACEBOOK@}
+            clientSecret: ${ENV_VAR_CLIENT_SECRET_FACEBOOK:@ENV_VAR_CLIENT_SECRET_FACEBOOK@}
+            redirectUri: ${ENV_VAR_WEB_APP_BASE_URL:@ENV_VAR_WEB_APP_BASE_URL@}/login/oauth2/code/facebook
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassname: org.h2.Driver
