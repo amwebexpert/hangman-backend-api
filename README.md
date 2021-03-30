@@ -115,6 +115,10 @@ You can skip certain tasks by providing `-x` argument:
 * https://github.com/nisrulz/app-privacy-policy-generator
 * https://app-privacy-policy-generator.nisrulz.com/
 
+# Other resources
+
+* https://springdoc.org/faq.html
+
 # Getting Started
 
 ### Reference Documentation
