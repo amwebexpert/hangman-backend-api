@@ -63,17 +63,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
 
         return request -> {
-            // Normal OAuth2 flow (github, facebook, ...)
-            OAuth2User user = delegate.loadUser(request);
-
-            // TODO Load user from our database using user.id + oAuthProvider
             String oAuthProvider = request.getClientRegistration().getRegistrationId();
             String tokenType = request.getAccessToken().getTokenType().getValue();
-            boolean isUserActive = true;
+
+            // Normal OAuth2 flow: call to the Authorization Server (github, facebook, ...)
+            OAuth2User user = delegate.loadUser(request);
 
             String info = String.format("Authenticated user [%s - %s] using [%s] OAuth2 API with access token type [%s]",
                     user.getName(), user.getAttributes().get("name"), oAuthProvider, tokenType);
             LOG.info(info);
+
+            // TODO Load user from our database using user.id + oAuthProvider, and return
+            //  something that extends our custom User object and implements OAuth2User
+            // @see https://spring.io/guides/tutorials/spring-boot-oauth2/
+            boolean isUserActive = true;
 
             // We can prevent login because of our internal DB info regarding that user
             if (isUserActive) {
