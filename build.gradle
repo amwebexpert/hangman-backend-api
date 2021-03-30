@@ -34,7 +34,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
     // https://www.baeldung.com/spring-rest-openapi-documentation
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.5'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.6'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-security', version: '1.5.6'
 
     implementation 'org.flywaydb:flyway-core'
     implementation 'com.h2database:h2'
