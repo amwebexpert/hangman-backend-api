@@ -2,7 +2,7 @@
 
 Hangman application backend REST API.
 
-## Commands
+## Configuration and instructions
 
 ### Setup Security for authenticating user against GitHub or Facebook
 
