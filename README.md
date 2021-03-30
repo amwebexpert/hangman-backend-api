@@ -4,6 +4,19 @@ Hangman application backend REST API.
 
 ## Commands
 
+### Setup Security for authenticating user against GitHub or Facebook
+
+You must create your Github and/or Facebook clientId and clientSecret. Any users may use the link to authenticate (available inside server welcome page `index.html`).
+Next you have to define these environment variables before deploying or before starting locally:
+
+    export ENV_VAR_WEB_APP_BASE_URL=<here your home page URL used by OAuth2 protocol>
+
+    export ENV_VAR_CLIENT_ID_GITHUB=<here your client id>
+    export ENV_VAR_CLIENT_SECRET_GITHUB=<here your client secret>
+
+    export ENV_VAR_CLIENT_ID_FACEBOOK=<here your client id>
+    export ENV_VAR_CLIENT_SECRET_FACEBOOK=<here your client secret>
+
 ### Start locally
 
 Starts the server locally and listen on port `8080`. 
@@ -23,15 +36,6 @@ will allow you to see final results:
 
 * https://esighclouddemo.appspot.com/
 * https://console.cloud.google.com/logs/query?project=esighclouddemo
-
-### Setup Security for authenticating user against GitHub
-
-You must create your Github clientId and clientSecret. Any users may use the link to authenticate (available inside server welcome page `index.html`).
-Next you have to define these environment variables before deploying or before starting locally:
-
-    export ENV_VAR_WEB_APP_BASE_URL=<here your home page URL used by OAuth2 protocol>
-    export ENV_VAR_CLIENT_ID_GITHUB=<here your client id>
-    export ENV_VAR_CLIENT_SECRET_GITHUB=<here your client secret>
 
 # Gradle tasks
 
