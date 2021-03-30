@@ -5,7 +5,7 @@
 
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="description" content="Hangman backend welcome page"/>
+    <meta name="description" content="Hangman backend API welcome page"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="/"/>
 
@@ -43,10 +43,16 @@ table, th, td {
 
     <h2>Secured API</h2>
     <ul>
+        <li><a href="/api/v1/user">/api/v1/user</a></li>
         <li><a href="/api/v1/admin/about">/api/v1/admin/about</a></li>
     </ul>
 
     <div class="container unauthenticated">
+        <a class="btn btn-primary" href="/index.html">
+            <span class="fa fa-home" aria-hidden="true"></span>
+            Home
+        </a>
+
         <a class="btn btn-secondary" href="/oauth2/authorization/github">
             <span class="fa fa-github" aria-hidden="true"></span>
             Login - GitHub
@@ -60,6 +66,11 @@ table, th, td {
     <div class="container authenticated">
         Logged in as: <span id="user"></span>
         <div>
+            <a class="btn btn-primary" href="/index.html">
+                <span class="fa fa-home" aria-hidden="true"></span>
+                Home
+            </a>
+
             <button onClick="logout()" class="btn btn-primary">
                 <span class="fas fa-logout"></span>
                 Logout
@@ -92,7 +103,8 @@ var logout = function() {
         $("#user").html('');
         $(".unauthenticated").show();
         $(".authenticated").hide();
-    })
+    });
+
     return true;
 }
 </script>

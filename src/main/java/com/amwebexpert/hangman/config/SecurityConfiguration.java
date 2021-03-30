@@ -1,12 +1,21 @@
 package com.amwebexpert.hangman.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2Error;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import java.util.logging.Logger;
 
 /**
  * https://spring.io/guides/tutorials/spring-boot-oauth2/
@@ -14,6 +23,7 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
  */
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+    private static final Logger LOG = Logger.getLogger(SecurityConfiguration.class.getSimpleName());
 
     @Autowired
     AboutInfo aboutInfo;
@@ -46,6 +56,33 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .permitAll())
                 .csrf(customizer -> customizer.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .oauth2Login();
+    }
+
+    @Bean
+    public OAuth2UserService<OAuth2UserRequest, OAuth2User> oauth2UserService() {
+        DefaultOAuth2UserService delegate = new DefaultOAuth2UserService();
+
+        return request -> {
+            // Normal OAuth2 flow (github, facebook, ...)
+            OAuth2User user = delegate.loadUser(request);
+
+            // TODO Load user from our database using user.id + oAuthProvider
+            String oAuthProvider = request.getClientRegistration().getRegistrationId();
+            String tokenType = request.getAccessToken().getTokenType().getValue();
+            boolean isUserActive = true;
+
+            String info = String.format("Authenticated user [%s - %s] using [%s] OAuth2 API with access token type [%s]",
+                    user.getName(), user.getAttributes().get("name"), oAuthProvider, tokenType);
+            LOG.info(info);
+
+            // We can prevent login because of our internal DB info regarding that user
+            if (isUserActive) {
+                return user;
+            } else {
+                String error = String.format("Deactivated user [%s - %s]", user.getName(), user.getAttributes().get("name"));
+                throw new OAuth2AuthenticationException(new OAuth2Error("invalid_user", error, ""));
+            }
+        };
     }
 
 }
